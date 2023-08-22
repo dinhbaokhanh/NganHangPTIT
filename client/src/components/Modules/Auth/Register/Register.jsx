@@ -6,7 +6,6 @@ import axios from "axios";
 const Register = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
 
 	const navigate = useNavigate();
 
@@ -20,9 +19,6 @@ const Register = () => {
 		if (name === "password") {
 			setPassword(value);
 		}
-		if(name === "confirmPassword"){
-			setConfirmPassword(value);
-		}
 	};
 
 	const handleSubmit = async (e) => {
@@ -31,13 +27,13 @@ const Register = () => {
 		const newErrors = {};
 
 		try {
-			const res = await axios.post("http://localhost:8000/register", { username, password });
-			const data = res.data;
-			console.log(data);
-			if(data.user){
-				navigate('/');
-			}
-
+				const res = await axios.post("http://localhost:8000/register", { username, password });
+				
+				const data = res.data;
+				if (data.user) {
+					navigate("/");
+				}
+			
 		} catch (error) {
 			const data = error?.response?.data;
 			const errors = data?.errors;
@@ -86,14 +82,6 @@ const Register = () => {
 						onChange={handleChange}
 					/>
 					{errors.password && <div className={styles.errorMsg}>{errors.password}</div>}
-					<input
-						type="password"
-						className={styles.input}
-						placeholder="Xác nhận mật khẩu"
-						name="confirmPassword"
-						onChange={handleChange}
-					/>
-					{errors.confirmPassword && <div className={styles.errorMsg}>{errors.confirmPassword}</div>}
 				</div>
 
 				<button className={styles.btn}>Đăng Ký</button>

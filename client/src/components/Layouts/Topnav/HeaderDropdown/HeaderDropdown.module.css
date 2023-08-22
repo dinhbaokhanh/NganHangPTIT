@@ -1,0 +1,13 @@
+.icon {
+    margin: 20px;
+    cursor: pointer;
+}
+
+.dropdown {
+    width: 100px;
+    
+}
+
+.dropdown_item {
+    cursor: pointer;
+}
